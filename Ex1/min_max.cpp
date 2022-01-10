@@ -3,7 +3,8 @@ using namespace std;
 #include<array>
 int main()
 {
-	int i,n,min,max;
+	int i,n, min,max;
+//	int a[20];
 	array<int,20> a;
 	cin>>n;
 	cout<<"Enter elements";
