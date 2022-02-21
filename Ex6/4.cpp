@@ -3,8 +3,7 @@ using namespace std;
 #include<vector>
 #include<limits.h>
 int maximum(int a, int b)
-{
-    
+{    
     if(a>b)
         return a;
     return b;

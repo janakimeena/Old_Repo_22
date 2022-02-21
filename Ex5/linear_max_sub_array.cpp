@@ -23,14 +23,21 @@ details linear_max_sub_array(vector<int> elements)
     high = n-1;
     for(i=0;i<n;i++)
     {
-        //cout<<"Positive sum "<<positive_sum_till_here<<endl;
-        //cout<<"Global max"<<global_max<<endl;
+        cout<<"Positive sum "<<positive_sum_till_here<<endl<<" ";
+        cout<<"Global max"<<global_max<<endl;
         // add each element in array to positive_sum_till_here variable
         positive_sum_till_here+=elements[i];
         // if it becomes greater than global_max then
         // make global max as the last index which negated the sum
         // make current index as high
-        if(((low-high+1)>max_len)&&(positive_sum_till_here>=global_max))
+        if(positive_sum_till_here>global_max)
+        {
+            global_max = positive_sum_till_here;
+            global_low = low;
+            high = i;
+            max_len = high-low+1;
+        }
+        else if(((positive_sum_till_here==global_max)&&((high-low+1)>max_len)))
         {
             global_max = positive_sum_till_here;
             global_low = low;

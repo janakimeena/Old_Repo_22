@@ -4,8 +4,7 @@ using namespace std;
 #include<limits.h>
 int memoized_cut_rod_aux(vector<int> &p, int length,vector<int> &r);
 int maximum(int a, int b)
-{
-    
+{    
     if(a>b)
         return a;
     return b;
@@ -30,7 +29,6 @@ int memoized_cut_rod_aux(vector<int> &p, int length,vector<int> &r)
         q = maximum(q,p[i-1]+memoized_cut_rod_aux(p,length-i,r));
     r[length-1] = q;
     return q;
-
 }
 int main()
 {
