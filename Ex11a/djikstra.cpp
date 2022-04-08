@@ -75,8 +75,7 @@ void first_step(map<string,list<node> > graph,map<string,table_details> &dij_tab
     }
 }
 void repeated_steps(map<string,list<node> > graph,map<string,table_details> &dij_table,vector<string> vertices,priority_queue<node> &Q,string start)
-{
-    
+{    
     node min_node,new_node;
     list<node> adj_nodes;
     string curr_node;
