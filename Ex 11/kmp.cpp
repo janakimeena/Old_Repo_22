@@ -28,6 +28,9 @@ void kmp_matcher(string T, string P)
     m = P.length();
     vector<int> pi(m,-1);
     compute_prefix_function(P,pi);
+    for(auto pi_entry:pi)
+        cout<<pi_entry<<" ";
+    cout<<endl;
     q = -1;
     for(i=0;i<n;i++)
     {
