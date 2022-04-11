@@ -25,7 +25,7 @@ void print_graph(vector<vector<int> >);
 /* Returns true if there is a path from source 's' to sink
 't' in residual graph. Also fills path to store the
 path */
-bool find_Path_From_Source_BFS(vector<vector<int> > residual_graph, int s, int t, int path[])
+bool find_Path_From_Source_BFS(vector<vector<int> > residual_graph, int s, int t, int parents[])
 {
 	// Create a visited array and mark all vertices as not
 	// visited
@@ -36,9 +36,11 @@ bool find_Path_From_Source_BFS(vector<vector<int> > residual_graph, int s, int t
 	// Create a queue, enqueue source vertex and mark source
 	// vertex as visited
 	queue<int> q;
+	cout<<"BFS called"<<endl;
+	cout<<s<<" ";
 	q.push(s);
 	visited[s] = true;
-	path[s] = -1;
+	parents[s] = -1;
 
 	// Standard BFS Loop
 	while (!q.empty()) {
@@ -52,11 +54,13 @@ bool find_Path_From_Source_BFS(vector<vector<int> > residual_graph, int s, int t
 				// just have to set its parent and can return
 				// true
 				if (v == t) {
-					path[v] = u;
+					parents[v] = u;
+					cout<<endl;
 					return true;
 				}
+				cout<<v<<" ";
 				q.push(v);
-				path[v] = u;
+				parents[v] = u;
 				visited[v] = true;
 			}
 		}
@@ -64,6 +68,7 @@ bool find_Path_From_Source_BFS(vector<vector<int> > residual_graph, int s, int t
 
 	// We didn't reach sink in BFS starting from source, so
 	// return false
+	cout<<endl;
 	return false;
 }
 
@@ -84,26 +89,28 @@ int fordFulkerson(vector<vector<int> > graph)
 	// Residual graph indicates residual capacity of edge
 	
 
-	int path[num_vertices]; // This array is filled by BFS and to
+	int parents[num_vertices]; // This array is filled by BFS and to
 				// store path
 
 	int max_flow = 0; // There is no flow initially
 
 	// Augment the flow while there is path from source to
 	// sink
-	while (find_Path_From_Source_BFS(residual_graph, s, t, path)) {
+	while (find_Path_From_Source_BFS(residual_graph, s, t, parents)) {
 		// Find minimum residual capacity that is bottleneck 
 		// of the edges along the path filled by BFSa
 		int path_flow = INT_MAX;
-		for (v = t; v != s; v = path[v]) {
-			u = path[v];
+		
+		for (v = t; v != s; v = parents[v]) {
+			cout<<v<<" ";
+			u = parents[v];
 			path_flow = min(path_flow, residual_graph[u][v]);
 		}
-
+		cout<<endl;
 		// update residual capacities of the edges and
 		// reverse edges along the path
-		for (v = t; v != s; v = path[v]) {
-			u = path[v];
+		for (v = t; v != s; v = parents[v]) {
+			u = parents[v];
 			residual_graph[u][v] -= path_flow;
 			residual_graph[v][u] += path_flow;
 		}
@@ -152,7 +159,7 @@ int main()
 	
 	cin>>num_vertices;
 	read_graph(graph,num_vertices);
-	print_graph(graph);
+	//print_graph(graph);
 	cout << "The maximum possible flow is "<<fordFulkerson(graph);
 
 	return 0;
