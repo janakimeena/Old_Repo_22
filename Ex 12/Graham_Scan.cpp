@@ -105,7 +105,6 @@ void convex_Hull(vector<pair<float,float> > points,stack<pair<float,float> > &CH
     // print sorted points
 
     // push first three points into stack
-    cout<<"Finished sorting\n";
     CH.push(points[0]);
     CH.push(points[1]);
     CH.push(points[2]);
@@ -147,12 +146,11 @@ int main()
     vector<pair<float,float> > points;
     stack<pair<float,float> > CH;
     pair<float,float> point;
-    int n;
-   
+    int n;   
     //read the points
     cin>>n;
     read_points(points,n);
     //print_points(points);
     convex_Hull(points,CH);  
-    print_Convex_Hull(CH);
+    //print_Convex_Hull(CH);
 }
